@@ -8,20 +8,21 @@
     
     <div class="twelve wide column">
         <div class="ui fluid raised card chatbox">
-            <div class="content">
-                <div class="ui small feed">
+            <div class="content" id="messages">
+                <div class="ui small feed" id="message_broadcast">
                     <%= render @messages %>
                 </div>
             </div>
             <div class="extra content">
-                <form class="ui reply form">
+                <%= form_with(url: message_path, method: :post, html: {class: "ui reply form"}, remote: true) do | f |%>
                     <div class="field">
                         <div class="ui fluid icon input">
-                            <input type="text" placeholder="Enter an message">
-                            <button class="ui green button"><i class="icon paper plane outline button"></i></button>
+                            <%= f.text_field :body %>
+                            <%= f.button '<i class="icon paper plane green button"></i>'.html_safe, id: "msg_submit"  %>
+                            <%# <button class="ui green button"><i class="icon paper plane"></i></button> %>
                         </div> 
                     </div>
-                </form>
+                <%end %>
             </div>
         </div>
     </div>
